@@ -12,10 +12,10 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
 		</dependency>
-		<!-- Uncomment this -->
-		<!--dependency>
+		
+		<dependency>
 			<groupId>org.smslib</groupId>
 			<artifactId>smslib</artifactId>
-		</dependency-->
+		</dependency>
 	</dependencies>
 </project>

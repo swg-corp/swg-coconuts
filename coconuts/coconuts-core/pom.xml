@@ -198,5 +198,8 @@
 	</dependencyManagement>
 	<modules>
 		<module>actions</module>
+		<module>report</module>
+		<module>backend</module>
+		<module>processors</module>
 	</modules>
 </project>
