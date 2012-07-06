@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="../templates/layout.xhtml">
+	<ui:define name="content">
+		<p:panel id="data">
+			<f:facet name="header">
+				<h:outputText value="#{messages.label_create} #{messages.label_observer}"/>
+			</f:facet>
+			<h:form prependId="false">
+				<h:panelGrid columns="3" columnClasses="col1,col2,col3">
+					<h:outputLabel for="name" value="Nama: "/>
+					<h:inputText id="name" value="#{voteSenderBean.voteSender.name}" required="true" requiredMessage="name is required"/>
+					<p:message for="name" showDetail="true"/>
+					<h:outputLabel for="cell" value="No Seluler: "/>
+					<h:inputText id="cell" value="#{voteSenderBean.voteSender.cellularNumber}" required="true" requiredMessage="CellularNumber is required">
+						
+					</h:inputText>
+					<p:message for="cell" showDetail="true"/>
+				</h:panelGrid>
+				<p:commandButton value="#{messages.label_save}" action="#{voteSenderBean.save}" ajax="false" async="false"/>
+			</h:form>
+		</p:panel>
+	</ui:define>
+</ui:composition>
+</html>

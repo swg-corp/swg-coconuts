@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="../templates/layout.xhtml">
+
+	<ui:define name="content">
+		<h:form prependId="false" id="growlForm">
+			<p:growl id="growl" showDetail="true" />
+		</h:form>
+		<h:form id="controlForm" prependId="false">
+			<p:panel id="provinsiPanel">
+				<h:panelGrid columns="2" columnClasses="col1,col2" rendered="#{exportKabupatenBean.dialogVisible}">
+					<p:commandButton ajax="false" value="Export Data for: #{exportKabupatenBean.provinsi.name}">
+						<p:fileDownload value="#{exportKabupatenBean.content}"/>
+					</p:commandButton>
+				</h:panelGrid>
+			</p:panel>
+			
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+</html>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+<f:view locale="#{localeBean.locale}" contentType="text/html">
+  <h:head>
+    <title>Coconuts</title>
+    <h:outputStylesheet library="css" name="standard.css" />
+  </h:head>
+  <h:body>
+    <h:panelGrid cellspacing="0" cellpadding="0" styleClass="wrapper">
+      <h:form>
+            <h:outputLink value="#{request.contextPath}#{currentViewId}">
+              <h:graphicImage library="images" name="Coconut.png"
+						styleClass="banner" />
+            </h:outputLink>
+            
+          </h:form>
+      <h:panelGrid columns="3" columnClasses="col1,col2,col3">
+            <h:form>
+            	<p:growl id="growl" showDetail="false"/>
+            	<h:panelGrid columns="3" columnClasses="col1,col2,col3" styleClass="dialog">
+            		<h:outputLabel for="username" value="Username:"/>
+            		<p:inputText id="username" value="#{loginBean.username}" required="true" requiredMessage="username harus diisi"/>
+            		<p:message for="username" showDetail="true"/>
+            		<h:outputLabel for="password" value="Password:"/>
+            		<p:password id="password" value="#{loginBean.password}" required="true" requiredMessage="password harus diisi"/>
+            		<p:message for="password" showDetail="true"/>
+            	</h:panelGrid>
+            	<p:commandButton action="#{loginBean.login}" value="Login" update="growl"/>
+            </h:form>
+      </h:panelGrid>
+    </h:panelGrid>
+  </h:body>
+</f:view>
+</html>

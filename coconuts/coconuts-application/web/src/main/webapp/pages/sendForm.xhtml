@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="../templates/layout.xhtml">
+	<ui:define name="content">
+		<h:form prependId="false" id="growlForm">
+			<p:growl id="growl" showDetail="true" />
+		</h:form>
+		<p:ajaxStatus onstart="statusDialog.show()"
+			oncomplete="statusDialog.hide()" />
+		<p:dialog modal="true" widgetVar="statusDialog" header="Loading..."
+			draggable="false" closable="false" resizable="false">
+			<h:graphicImage library="images" name="ajax-loader.gif" alt="loader" />
+		</p:dialog>
+		<p:panel id="sendPanel">
+			<f:facet name="header">
+					<h:outputText value="Pengiriman Pesan" />
+			</f:facet>
+			<h:outputFormat id="sendUnavailable"
+					value="Gateway Tidak Aktif"
+					rendered="#{!gatewayBean.started}">
+					<f:param value="Gateway" />
+			</h:outputFormat>
+			<h:form id="sendForm" prependId="false" rendered="#{gatewayBean.started}">
+				<h:panelGrid id="sendPanelGrid" columns="3" columnClasses="col1,col2,col3">
+					<h:outputLabel for="recipient" value="No Tujuan: "/>
+					<h:inputText id="recipient" value="#{gatewayBean.message.recipient}"/>
+					<h:message for="recipient" showDetail="true"/>
+					<h:outputLabel for="content" value="Isi Pesan: "/>
+					<h:inputTextarea id="content" value="#{gatewayBean.message.content}"/>
+					<h:message for="content" showDetail="true"/>
+				</h:panelGrid>
+				<p:commandButton id="sendButton" action="#{gatewayBean.send}" update="@form :growlForm:growl" value="Kirim"/>
+			</h:form>
+		</p:panel>
+		
+	</ui:define>
+</ui:composition>
+</html>

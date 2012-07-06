@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="../templates/layout.xhtml">
+	<ui:define name="content">
+		<h:form prependId="false" id="growlForm">
+			<p:growl id="growl" showDetail="true" />
+		</h:form>
+		<h:form id="controlForm" prependId="false">
+			<p:panel id="tpsPanel">
+				<f:facet name="header">
+					<h:outputText value="TPS" />
+				</f:facet>
+				<h:outputFormat id="noRecordsFound"
+					value="#{messages.label_no_records_found}"
+					rendered="#{!tpsBean.dataVisible}">
+					<f:param value="TPS" />
+				</h:outputFormat>
+				<p:dataTable id="tpsTable" value="#{tpsBean.tps}" var="t"
+					paginator="true" rendered="#{tpsBean.dataVisible}"
+					resizableColumns="false"
+					paginatorTemplate=" {CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="5,10,25,50" rows="10">
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="No TPS" />
+						</f:facet>
+						<h:outputText value="#{t.nomor}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Kelurahan" />
+						</f:facet>
+						<h:outputText value="#{t.kelurahan.name}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Kecamatan" />
+						</f:facet>
+						<h:outputText value="#{t.kelurahan.kecamatan.name}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Kabupaten/Kota" />
+						</f:facet>
+						<h:outputText value="#{t.kelurahan.kecamatan.kabupaten.name}" />
+					</p:column>
+					<p:column styleClass="action-column">
+						<f:facet name="header">
+							<h:outputText value="#{messages.label_actions}" />
+						</f:facet>
+						<p:commandButton id="deleteButton" icon="ui-icon-trash"
+							oncomplete="deleteDialog.show()" title="#{messages.label_delete}">
+							<f:setPropertyActionListener target="#{tpsBean.tpsBean}"
+								value="#{t}" />
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+				<p:separator />
+				<p:commandButton value="Buat baru" action="#{tpsBean.displayNew}"
+					icon="ui-icon-document" id="createButton"
+					oncomplete="createDialog.show()"
+					update=":createForm:createPanelGrid" />
+			</p:panel>
+		</h:form>
+		<p:dialog id="createDialog" header="Ubah/Buat TPS" modal="true"
+			widgetVar="createDialog" dynamic="true" resizable="true"
+			maximizable="true" showEffect="fade" hideEffect="fade">
+			<p:outputPanel id="createPanel">
+				<h:form id="createForm">
+					<h:panelGrid id="createPanelGrid" columns="3" styleClass="dialog"
+						columnClasses="col1,col2,col3"
+						binding="#{tpsBean.createPanelGrid}" />
+					<h:panelGrid columns="2" columnClasses="col1,col2">
+						<p:commandButton id="createSaveButton"
+							value="#{messages.label_save}" action="#{tpsBean.save}"
+							update="createPanelGrid :controlForm :growlForm:growl"
+							oncomplete="createDialog.hide()" />
+						<p:commandButton id="createCloseButton"
+							value="#{messages.label_close}" onclick="createDialog.hide()"
+							type="button" action="#{tpsBean.clear}" />
+					</h:panelGrid>
+				</h:form>
+			</p:outputPanel>
+		</p:dialog>
+		<p:confirmDialog id="deleteDialog" widgetVar="deleteDialog"
+			message="#{messages.label_delete_record}" showEffect="fade"
+			hideEffect="explode" header="#{messages.label_confirm_deletion}"
+			severity="alarm">
+			<p:outputPanel id="deletePanel">
+				<h:form id="deleteForm">
+					<p:commandButton id="deleteYesButton" value="#{messages.label_yes}"
+						action="#{tpsBean.delete}" update=":controlForm :growlForm:growl"
+						oncomplete="deleteDialog.hide()" />
+					<p:commandButton id="deleteNoButton" value="#{messages.label_no}"
+						onclick="deleteDialog.hide()" type="button" />
+				</h:form>
+			</p:outputPanel>
+		</p:confirmDialog>
+	</ui:define>
+
+</ui:composition>
+</html>

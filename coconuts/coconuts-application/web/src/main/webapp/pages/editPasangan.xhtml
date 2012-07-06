@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="../templates/layout.xhtml">
+	<ui:define name="content">
+		<p:panel id="data">
+			<f:facet name="header">
+				<h:outputText value="#{messages.label_create} #{messages.label_candidate}"/>
+			</f:facet>
+			<h:form prependId="false">
+				<h:panelGrid columns="3" columnClasses="col1,col2,col3">
+					<h:outputLabel for="nick" value="Nama Kandidat: "/>
+					<h:inputText id="nick" value="#{candidateBean.couple.nickName}" required="true" requiredMessage="nama kandidat harus diisi">
+						<f:validator binding="#{candidateBean.nameValidator}" for="nick"/>
+					</h:inputText>
+					<p:message for="nick" showDetail="true"/>
+					<h:outputLabel for="noUrut" value="No Urut: "/>
+					<p:spinner id="noUrut" value="#{candidateBean.couple.nomorUrut}" required="true" requiredMessage="nomor urut harus diisi">
+						<f:validator binding="#{candidateBean.numberValidator}" for="noUrut"/>
+					</p:spinner>
+					<p:message for="noUrut" showDetail="true"/>
+				</h:panelGrid>
+				<p:separator/>
+				<h:outputLabel value="Kandidat 1 "/>
+				<h:panelGrid columns="3" columnClasses="col1,col2,col3">
+					<h:outputLabel for="name1" value="Name"/>
+					<h:inputText id="name1" value="#{candidateBean.head.name}" required="true" requiredMessage="name is required"/>
+					<p:message for="name1" showDetail="true"/>
+					<h:outputLabel for="bday1" value="Tanggal Lahir"/>
+					<p:calendar id="bday1" value="#{candidateBean.head.birthDay}" pattern="dd/MM/yyyy" navigator="true" required="true"/>
+					<p:message for="bday1" showDetail="true"/>
+				</h:panelGrid>
+				<h:outputLabel value="Kandidat 2 "/>
+				<h:panelGrid columns="3" columnClasses="col1,col2,col3">
+					<h:outputLabel for="name2" value="Name"/>
+					<h:inputText id="name2" value="#{candidateBean.vice.name}" required="true" requiredMessage="name is required"/>
+					<p:message for="name2" showDetail="true"/>
+					<h:outputLabel for="bday2" value="Tanggal Lahir"/>
+					<p:calendar id="bday2" value="#{candidateBean.vice.birthDay}" pattern="dd/MM/yyyy" navigator="true" required="true"/>
+					<p:message for="bday2" showDetail="true"/>
+				</h:panelGrid>
+				<p:commandButton value="#{messages.label_save}" action="#{candidateBean.save}" ajax="false" async="false"/>
+			</h:form>
+		</p:panel>
+	</ui:define>
+</ui:composition>
+</html>

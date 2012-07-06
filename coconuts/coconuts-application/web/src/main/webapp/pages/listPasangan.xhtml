@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+<ui:composition template="../templates/layout.xhtml">
+  <ui:define name="content">
+   	<h:form prependId="false" id="growlForm">
+			<p:growl id="growl" showDetail="false" />
+	</h:form>
+	<h:form prependId="false" id="dataForm">
+			<p:panel id="data">
+				<f:facet name="header">
+					<h:outputText value="#{messages.label_candidate}" />
+				</f:facet>
+				<h:outputFormat id="noRecordsFound"
+					value="#{messages.label_no_records_found}"
+					rendered="#{!candidateBean.dataVisible}">
+					<f:param value="#{messages.label_candidate}" />
+				</h:outputFormat>
+				<p:dataTable id="pasanganTable" paginator="true"
+					value="#{candidateBean.couples}" var="couple"
+					resizableColumns="false"
+					rendered="#{candidateBean.dataVisible}"
+					paginatorTemplate=" {CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="5,10,25,50" rows="10" widgetVar="pTable">
+					<f:facet name="header">
+						<p:outputPanel>
+							<h:outputText value="Search Filter:"/>
+							<h:inputText id="globalFilter" onkeyup="pTable.filter()"/>
+						</p:outputPanel>
+					</f:facet>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="No Urut"/>
+						</f:facet>
+						<h:outputText value="#{couple.nomorUrut}"/>
+					</p:column>
+					<p:column filterBy="#{couple.nickName}" filterMatchMode="contains">
+						<f:facet name="header">
+							<h:outputText value="Nama" />
+						</f:facet>
+						<h:outputText value="#{couple.nickName}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Perolehan Sementara" />
+						</f:facet>
+						<h:outputText value="#{couple.vote.total}" />
+					</p:column>
+					
+				</p:dataTable>
+			</p:panel>
+		</h:form>
+  </ui:define>
+</ui:composition>
+</html>

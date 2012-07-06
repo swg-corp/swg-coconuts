@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="../templates/layout.xhtml">
+
+	<ui:define name="content">
+		<h:form prependId="false" id="growlForm">
+			<p:growl id="growl" showDetail="true" />
+		</h:form>
+		<h:form id="controlForm" prependId="false">
+			<p:panel id="kabupatenPanel">
+
+				<h:panelGrid columns="1" columnClasses="col1">
+					<h:outputLabel for="kabupatenInput" value="#{message.label_city} " />
+					<p:autoComplete binding="#{kabupatenVoteBean.autoComplete}"
+						id="kabupatenInput">
+						<p:ajax event="itemSelect" listener="#{kabupatenVoteBean.handle}"
+							update="chartOutput,@form" />
+					</p:autoComplete>
+				</h:panelGrid>
+				<p:ajaxStatus>
+					<f:facet name="start">
+						<h:graphicImage library="images" name="ajax-loader.gif"
+							alt="loader" />
+					</f:facet>
+					<f:facet name="complete">
+						<p:commandButton id="downloadButton"
+							value="Export" action="#{exportKecamatanBean.display}" ajax="false" async="false">
+							<f:setPropertyActionListener target="#{exportKecamatanBean.kabupaten}" value="#{kabupatenVoteBean.kabupaten}"/>
+						</p:commandButton>
+					</f:facet>
+				</p:ajaxStatus>
+				
+			</p:panel>
+				<p:panel rendered="#{kabupatenVoteBean.dataVisible}" id="chartOutput">
+					<f:facet name="header">
+						<h:outputText value="#{messages.label_temp_result} #{messages.label_city}" />
+					</f:facet>
+					<p:dataList value="#{kabupatenVoteBean.voteDescription}" var="desc" rendered="#{kabupatenVoteBean.dataVisible}">
+						<h:outputText value="#{desc}" />
+					</p:dataList>
+					<p:dataTable id="reportTable" value="#{kabupatenVoteBean.voteMaps}"
+						var="t" resizableColumns="false" widgetVar="pTable" paginator="true"
+						paginatorTemplate=" {CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="5,10,25,50" rows="10" rendered="#{kabupatenVoteBean.dataVisible}">
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Nama Kecamatan" />
+							</f:facet>
+							<h:outputText value="#{t.areaId}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Update Terakhir" />
+							</f:facet>
+							<h:outputText value="#{t.lastUpdate}" />
+						</p:column>
+						<p:columns var="col" columnIndexVar="colIndex"
+							value="#{kabupatenVoteBean.columns}">
+							<f:facet name="header">
+								<h:outputText value="#{col}" />
+							</f:facet>
+							<h:outputText value="#{t.voteResult.get(col)}"></h:outputText>
+						</p:columns>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Total Suara" />
+							</f:facet>
+							<h:outputText value="#{t.total}" />
+						</p:column>
+					</p:dataTable>
+					<p:barChart value="#{kabupatenVoteBean.model}" legendPosition="ne"
+						enhancedLegend="true" barMargin="20" barPadding="21" rendered="#{kabupatenVoteBean.dataVisible}"/>
+				
+				</p:panel>
+			
+		</h:form>
+		
+
+	</ui:define>
+</ui:composition>
+</html>

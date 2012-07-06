@@ -92,5 +92,6 @@
 	
 	<modules>
 		<module>coconuts-core</module>
+		<module>coconuts-application</module>
 	</modules>
 </project>

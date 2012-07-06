@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+<ui:composition>
+  <p:menu>
+  	<p:submenu label="Daerah Pemilihan">
+  		<p:menuitem value="Provinsi" action="#{provinsiBean.displayList}" ajax="false" async="false"/>
+  		<p:menuitem value="#{messages.label_list} Kabupaten" action="#{kabupatenBean.displayList}" ajax="false" async="false"/>
+  		<p:menuitem value="#{messages.label_list} Kecamatan" action="#{kecamatanBean.displayList}" ajax="false" async="false"/>
+  		<p:menuitem value="#{messages.label_list} Kelurahan" action="#{kelurahanBean.displayList}" ajax="false" async="false"/>
+  		<p:menuitem value="#{messages.label_list} TPS" action="#{tpsBean.displayList}" ajax="false" async="false"/>
+  	</p:submenu>
+  	<p:submenu label="Pemantau">
+  		<p:menuitem value="#{messages.label_list} Pemantau" action="#{voteSenderBean.displayList}" ajax="false" async="false"/>
+  		<p:menuitem value="#{messages.label_create} Pemantau" action="#{voteSenderBean.displayNew}" ajax="false" async="false"/>
+  	</p:submenu>
+  	<p:submenu label="Upload Data">
+  		<p:menuitem value="Upload" action="#{fileUploadBean.uploadForm}" ajax="false" async="false"/>
+  	</p:submenu>
+  </p:menu>
+ 
+  
+</ui:composition>
+</html>

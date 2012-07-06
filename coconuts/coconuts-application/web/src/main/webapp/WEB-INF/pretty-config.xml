@@ -1,0 +1,138 @@
+<pretty-config xmlns="http://ocpsoft.com/prettyfaces/3.3.2"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://ocpsoft.com/prettyfaces/3.3.2
+                                   		http://ocpsoft.com/xml/ns/prettyfaces/ocpsoft-pretty-faces-3.3.2.xsd">
+
+	<!-- Begin Example RewriteRules // These are custom rewrite-rules, and are 
+		probably not necessary for your application. <rewrite match="^/old-url/(\w+)/$" 
+		substitute="/new_url/$1/" redirect="301" /> -->
+
+
+
+	<url-mapping id="home">
+		<pattern value="/" />
+		<view-id value="/pages/main.jsf" />
+	</url-mapping>
+	
+	<url-mapping id="login">
+		<pattern value="/login"/>
+		<view-id value="/login.jsf"/>
+	</url-mapping>
+	
+	<url-mapping id="gateway">
+		<pattern value="/gateway"/>
+		<view-id value="/pages/gateway.jsf"/>
+	</url-mapping>
+	
+	<url-mapping id="propinsi">
+		<pattern value="/propinsi"/>
+		<view-id value="/pages/listProvinsi.jsf"/>
+	</url-mapping>
+	
+	<url-mapping id="propinsi-report">
+		<pattern value="/propinsi/report"/>
+		<view-id value="/pages/provinsiChart.jsf"/>
+	</url-mapping>
+	
+		<url-mapping id="propinsi-export">
+		<pattern value="/propinsi/export"/>
+		<view-id value="/pages/downloadKabupaten.jsf"/>
+	</url-mapping>
+	
+	<url-mapping id="kabupaten">
+		<pattern value="/kabupaten"/>
+		<view-id value="/pages/listKabupaten.jsf"/>
+	</url-mapping>
+	
+	<url-mapping id="kabupaten-report">
+		<pattern value="/kabupaten/report"/>
+		<view-id value="/pages/kabupatenChart.jsf"/>
+	</url-mapping>
+	
+	<url-mapping id="kabupaten-export">
+		<pattern value="/kabupaten/export"/>
+		<view-id value="/pages/downloadKecamatan.jsf"/>
+	</url-mapping>
+	
+	<url-mapping id="kecamatan">
+		<pattern value="/kecamatan"/>
+		<view-id value="/pages/listKecamatan.jsf"/>
+	</url-mapping>
+	
+	<url-mapping id="kecamatan-report">
+		<pattern value="/kecamatan/report"/>
+		<view-id value="/pages/kecamatanChart.jsf"/>
+	</url-mapping>
+	
+	<url-mapping id="kecamatan-export">
+		<pattern value="/kecamatan/export"/>
+		<view-id value="/pages/downloadKelurahan.jsf"/>
+	</url-mapping>
+	
+	<url-mapping id="kelurahan">
+		<pattern value="/kelurahan"/>
+		<view-id value="/pages/listKelurahan.jsf"/>
+	</url-mapping>
+	
+	<url-mapping id="kelurahan-report">
+		<pattern value="/kelurahan/report"/>
+		<view-id value="/pages/kelurahanChart.jsf"/>
+	</url-mapping>
+	
+	<url-mapping id="kelurahan-export">
+		<pattern value="/kelurahan/export"/>
+		<view-id value="/pages/downloadTps.jsf"/>
+	</url-mapping>
+	
+	<url-mapping id="tps">
+		<pattern value="/tps"/>
+		<view-id value="/pages/listTps.jsf"/>
+	</url-mapping>
+	
+	<url-mapping id="pemantau">
+		<pattern value="/pemantau"/>
+		<view-id value="/pages/listPemantau.jsf"/>
+	</url-mapping>
+	
+	<url-mapping id="edit-pemantau">
+		<pattern value="/pemantau/edit"/>
+		<view-id value="/pages/editPemantau.jsf"/>
+	</url-mapping>
+	
+	<url-mapping id="candidate">
+		<pattern value="/candidate"/>
+		<view-id value="/pages/listPasangan.jsf"/>
+	</url-mapping>
+	
+	<url-mapping id="candidate-edit">
+		<pattern value="/candidate/edit"/>
+		<view-id value="/pages/editPasangan.jsf"/>
+	</url-mapping>
+	
+	<url-mapping id="pesan-masuk">
+		<pattern value="/incoming"/>
+		<view-id value="/pages/listPesanMasuk.jsf"/>
+	</url-mapping>
+	
+	<url-mapping id="pesan-masuk-success">
+		<pattern value="/incoming/processed"/>
+		<view-id value="/pages/listPesanProceed.jsf"/>
+	</url-mapping>
+	
+	<url-mapping id="pesan-masuk-failed">
+		<pattern value="/incoming/failed"/>
+		<view-id value="/pages/listPesanFailed.jsf"/>
+	</url-mapping>
+	
+	<url-mapping id="pesan-keluar">
+		<pattern value="/outgoing"/>
+		<view-id value="/pages/listPesanKeluar.jsf"/>
+	</url-mapping>
+	
+	<url-mapping id="pesan-kirim">
+		<pattern value="/send"/>
+		<view-id value="/pages/sendForm.jsf"/>
+	</url-mapping>
+
+
+</pretty-config>
